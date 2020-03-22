@@ -1,14 +1,21 @@
 import React from 'react';
-import './App.css';
+import './styles/App.css';
+import  TemporaryDrawer from './components/home/MenuDrawer.js';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import MenuIcon from '@material-ui/icons/Menu';
+import HomeView from './components/home/HomeView.js'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-        INITIAL
-        </p>
-      </header>
+     <BrowserRouter>
+      <HomeView/>
+
+          <Switch>
+          <Route path='/:indeks' component={HomeView}/>
+          </Switch>
+      </BrowserRouter>
     </div>
   );
 }
