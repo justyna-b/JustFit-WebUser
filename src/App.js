@@ -4,14 +4,21 @@ import TemporaryDrawer from './components/home/MenuDrawer.js'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import MenuIcon from '@material-ui/icons/Menu'
 import HomeView from './components/home/HomeView.js'
+import ProgrammeView from './components/programme/ProgrammeView.js'
+import SignedInUsersOfferView from './components/offer/SignedInUsersOfferView.js'
+import StaffsView from './components/staff/StaffsView.js'
+import AvailableOffers from './components/offer/AvailableOffers.js'
 
 function App () {
   return (
     <div className='App'>
       <BrowserRouter>
-        <HomeView />
         <Switch>
-          <Route path='/:indeks' component={HomeView} />
+          <Route exact path='/' component={HomeView} />
+          <Route exact path='/home' component={HomeView} />
+          <Route path='/0' component={ProgrammeView} />
+          <Route path='/1' component={SignedInUsersOfferView} />
+          <Route path='/2' component={StaffsView} />
         </Switch>
       </BrowserRouter>
     </div>
