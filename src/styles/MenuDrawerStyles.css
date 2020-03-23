@@ -1,42 +1,47 @@
 .xxx:hover {
-    font-weight: 900;
-    color: orange;
+  font-weight: 900;
+  color: orange;
 }
 
 .xxx:link {
-    color: white;
+  color: white;
 }
 
 .MuiPaper-root.MuiDrawer-paper.MuiPaper-elevation16 {
-    background-color: #14161A;
-    text-decoration: none;
+  background-color: #14161a;
+  text-decoration: none;
 }
 
 .MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
-    text-decoration: none;
+  text-decoration: none;
 }
 .MuiTypography-displayBlock {
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .MuiTypography-displayBlock:hover {
-    color: orange;
-    font-weight: bold;
-    text-decoration: none;
-    font-style: normal;
-    text-transform: uppercase;
-    font-size: larger;
-
+  color: orange;
+  font-weight: bold;
+  text-decoration: none;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: larger;
 }
 
 .MultiList-root a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:-webkit-any-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
+span.MuiButton-label {
+  font-weight: bold;
+}
 
+span.MuiButton-label:hover {
+  font-weight: 900;
+}
