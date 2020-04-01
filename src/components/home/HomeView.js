@@ -4,6 +4,12 @@ import TemporaryDrawer from './MenuDrawer.js'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew'
 import HeaderPanel from '../navigation/HeaderPanel.js'
+import PhotoBodyMenu from './PhotoBodyMenu.js'
+import Footer from './Footer.js'
+
+//If wrapp it into that component css do not work. Do I need it? 
+// import TableFooter from '@material-ui/core/TableFooter'
+
 
 class HomeView extends React.Component {
   render () {
@@ -13,8 +19,11 @@ class HomeView extends React.Component {
           <HeaderPanel />
         </header>
         <body className='App-Body'>
-          <p>body</p>
+          <PhotoBodyMenu />
         </body>
+        <footer style={{ backgroundColor: 'black' }}>
+          <Footer />
+        </footer>
       </div>
     )
   }
