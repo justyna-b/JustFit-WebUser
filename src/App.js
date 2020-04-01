@@ -8,17 +8,20 @@ import ProgrammeView from './components/programme/ProgrammeView.js'
 import SignedInUsersOfferView from './components/offer/SignedInUsersOfferView.js'
 import StaffsView from './components/staff/StaffsView.js'
 import AvailableOffers from './components/offer/AvailableOffers.js'
+import LoginPageView from './components/logging/LoginPageView.js'
+
 
 function App () {
   return (
     <div className='App'>
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' component={HomeView} />
+          <Route exact path='/' component={LoginPageView} />
           <Route exact path='/home' component={HomeView} />
           <Route path='/0' component={ProgrammeView} />
           <Route path='/1' component={SignedInUsersOfferView} />
           <Route path='/2' component={StaffsView} />
+          <Route path='/login' component={LoginPageView} />
         </Switch>
       </BrowserRouter>
     </div>

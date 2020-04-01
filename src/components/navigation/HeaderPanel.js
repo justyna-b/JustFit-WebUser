@@ -3,6 +3,7 @@ import '../../styles/HeaderPanel.css'
 import TemporaryDrawer from '../home/MenuDrawer.js'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew'
+import AuthService from '../logging/AuthService'
 
 import styled from 'styled-components'
 
@@ -48,6 +49,15 @@ const Column = styled.div`
 `
 
 export default function HeaderPanel (props) {
+  const Auth = new AuthService()
+
+  const onClickLogOut = event => {
+    event.preventDefault()
+    Auth.logout()
+    window.location.reload()
+    console.log('shoul logout true')
+  }
+
   return (
     <div>
       <Row className='Logo-Panel'>
@@ -60,7 +70,13 @@ export default function HeaderPanel (props) {
             <span className='span-my-carnet'>Mój karnet </span>
           </button>
         </Column>
-        <Column xs='3' md='2' lg='2' className='link-logout'>
+        <Column
+          xs='3'
+          md='2'
+          lg='2'
+          className='link-logout'
+          onClick={onClickLogOut}
+        >
           <PowerSettingsNewIcon /> Wyloguj
         </Column>
       </Row>
