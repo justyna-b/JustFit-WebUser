@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthService from './AuthService'
-import { Form, InputGroup } from 'react-bootstrap'
+import { Form, InputGroup, Container, Row, Col } from 'react-bootstrap'
 
 class AltLoginPageView extends React.Component {
   constructor (props) {
@@ -15,7 +15,6 @@ class AltLoginPageView extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
     this.Auth = new AuthService()
   }
 
@@ -45,39 +44,57 @@ class AltLoginPageView extends React.Component {
 
   render () {
     return (
-      <div>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <Form.Group controlId='formBasicEmail'>
-              <InputGroup>
-                <Form.Control
-                  type='email'
-                  placeholder='Email'
-                  name='email'
-                  onChange={this.handleChange}
-                  required
-                />
-              </InputGroup>
-            </Form.Group>
+      <Container
+        fluid
+        style={{ paddingLeft: '0px', paddingRight: '0px' }}
+        className='justify-content-md-center'
+      >
+        <Row>
+          <Col style={{ backgroundColor: 'orange' }}>
+            <Col
+              lg={10}
+              sm={12}
+              md={10}
+              style={{
+                paddingLeft: '15%',
+                marginTop: '40%',
+                paddingBottom: '40%'
+              }}
+            >
+              <form onSubmit={this.handleSubmit}>
+                <Form.Group controlId='formBasicEmail'>
+                  <InputGroup>
+                    <Form.Control
+                      type='email'
+                      placeholder='Email'
+                      name='email'
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </InputGroup>
+                </Form.Group>
 
-            <Form.Group controlId='formBasicPassword'>
-              <InputGroup>
-                <InputGroup.Prepend></InputGroup.Prepend>
-                <Form.Control
-                  type='password'
-                  placeholder='Hasło'
-                  name='password'
-                  onChange={this.handleChange}
-                  required
-                />
-              </InputGroup>
-            </Form.Group>
-            <div>
-              <button type='submit'>Zaloguj</button>
-            </div>
-          </form>
-        </div>
-      </div>
+                <Form.Group controlId='formBasicPassword'>
+                  <InputGroup>
+                    <InputGroup.Prepend></InputGroup.Prepend>
+                    <Form.Control
+                      type='password'
+                      placeholder='Hasło'
+                      name='password'
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </InputGroup>
+                </Form.Group>
+                <div>
+                  <button type='submit'>Zaloguj</button>
+                </div>
+              </form>
+            </Col>
+          </Col>
+          <Col style={{ backgroundColor: 'black' }}>lorem ipsum</Col>
+        </Row>
+      </Container>
     )
   }
 }
