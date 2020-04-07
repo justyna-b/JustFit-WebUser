@@ -10,7 +10,7 @@ export default class AuthService {
   login (username, password) {
     let base64 = require('base-64')
     return this.fetch(
-      'http://justfitclient.pythonanywhere.com/account/client/properties/',
+      'https://justfitclient.pythonanywhere.com/account/client/properties/',
       {
         method: 'GET',
         headers: {
@@ -37,6 +37,27 @@ export default class AuthService {
     let base64 = require('base-64')
     let auth = base64.encode(username + ':' + password)
     localStorage.setItem('auth', auth)
+    fetch('https://justfitclient.pythonanywhere.com/account/token/create/', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Basic' + ' ' + base64.encode(username + ':' + password)
+      },
+      body: JSON.stringify({
+        password: password,
+        username: username
+      })
+    })
+      .then(response => {
+        if (response.status >= 200 && response.status < 300) {
+          return response.json()
+        }
+      })
+      .then(data => {
+        let token = data.token
+        localStorage.setItem('token', token)
+      })
   }
 
   getAuth () {
@@ -45,6 +66,7 @@ export default class AuthService {
 
   logout () {
     localStorage.removeItem('auth')
+    localStorage.removeItem('token')
   }
 
   getProfile () {

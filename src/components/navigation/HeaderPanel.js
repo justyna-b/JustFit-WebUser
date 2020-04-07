@@ -25,12 +25,12 @@ const Column = styled.div`
   float: left;
   ${({ xs }) => (xs ? getWidthString(xs) : 'width:100%')};
   color: orange;
-  margin-top: 30px;
 
   @media only screen and (min-width: 768px) {
     ${({ sm }) => sm && getWidthString(sm)};
     color: orange;
-    margin-top: 30px;
+        width:100%;
+        float:center;
   }
 
   @media only screen and (min-width: 992px) {
@@ -61,17 +61,17 @@ export default function HeaderPanel (props) {
   return (
     <div>
       <Row className='Logo-Panel'>
-        <Column xs='4' md='8' lg='8'>
+        <Column xs='10' md='8' lg='8'>
           <p className='logo'>JUST FIT </p>
         </Column>
-        <Column xs='4' md='2' lg='2'>
+        <Column xs='10' md='2' lg='2'>
           <button type='button' className='my-contract-button'>
             <AccessibilityNewIcon />
             <span className='span-my-carnet'>Mój karnet </span>
           </button>
         </Column>
         <Column
-          xs='3'
+          xs='10'
           md='2'
           lg='2'
           className='link-logout'

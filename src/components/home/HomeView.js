@@ -8,9 +8,7 @@ import PhotoBodyMenu from './PhotoBodyMenu.js'
 import Footer from './Footer.js'
 import AuthService from '../logging/AuthService'
 import { Redirect } from 'react-router-dom'
-
-//If wrapp it into that component css do not work. Do I need it?
-// import TableFooter from '@material-ui/core/TableFooter'
+import decode from 'jwt-decode'
 
 class HomeView extends React.Component {
   constructor (props) {
@@ -20,23 +18,25 @@ class HomeView extends React.Component {
       name: '',
       surname: '',
       phoneNumber: '',
-      email: ''
+      email: '',
+      id: ''
     }
-
     this.Auth = new AuthService()
+    this.clickHandler = this.clickHandler.bind(this)
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     if (this.Auth.loggedIn()) {
       this.Auth.fetch(
-        'http://justfitclient.pythonanywhere.com/account/client/properties/'
+        'https://justfitclient.pythonanywhere.com/account/client/properties/'
       )
         .then(res => {
           this.setState({
             name: res.first_name,
             surname: res.last_name,
             email: res.email,
-            phoneNumber: res.phone_number
+            phoneNumber: res.phone_number,
+            id: res.id
           })
         })
         .catch(error => {
@@ -47,6 +47,23 @@ class HomeView extends React.Component {
     }
   }
 
+  clickHandler = event => {
+    event.preventDefault()
+
+    let token = localStorage.getItem('token')
+    this.Auth.fetch('https://frozen-falls-21272.herokuapp.com/clients/add', {
+      method: 'POST',
+      body: JSON.stringify({
+        active: true,
+        token: token,
+        id: this.state.id
+      })
+    }).then(response => {
+      if (response.status >= 200 && response.status < 300) {
+        return response.json()
+      }
+    })
+  }
   render () {
     return (
       <div className='App'>
@@ -55,7 +72,10 @@ class HomeView extends React.Component {
           <HeaderPanel />
         </header>
         <body className='App-Body'>
-          <PhotoBodyMenu />
+          <div>
+            <button onClick={this.clickHandler}>wydarzenia</button>
+            <PhotoBodyMenu />
+          </div>
         </body>
         <footer style={{ backgroundColor: 'black' }}>
           <Footer />
