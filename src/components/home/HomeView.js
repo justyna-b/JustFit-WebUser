@@ -9,6 +9,10 @@ import Footer from './Footer.js'
 import AuthService from '../logging/AuthService'
 import { Redirect } from 'react-router-dom'
 import decode from 'jwt-decode'
+import { Link } from 'react-router-dom'
+import traininge from '../../photos/traininge.jpg'
+import events from '../../photos/events.jpg'
+import '../../styles/HomeView.css'
 
 class HomeView extends React.Component {
   constructor (props) {
@@ -19,7 +23,8 @@ class HomeView extends React.Component {
       surname: '',
       phoneNumber: '',
       email: '',
-      id: ''
+      id: '',
+      redirectToEventsPage: false
     }
     this.Auth = new AuthService()
     this.clickHandler = this.clickHandler.bind(this)
@@ -58,13 +63,22 @@ class HomeView extends React.Component {
         token: token,
         id: this.state.id
       })
-    }).then(response => {
-      if (response.status >= 200 && response.status < 300) {
-        return response.json()
-      }
     })
+      .then(response => {
+        if (response.status >= 200 && response.status < 300) {
+          return response.json()
+        }
+      })
+      .then(data => {
+        this.setState({ redirectToEventsPage: true })
+        console.log('redirect or not: ' + this.state.redirectToEventsPage)
+      })
   }
   render () {
+    if (this.state.redirectToEventsPage) {
+      window.location.replace('http://www.wp.pl')
+      this.setState({ redirectToEventsPage: false })
+    }
     return (
       <div className='App'>
         {this.state.auth ? '' : <Redirect to='/login' />}
@@ -72,8 +86,19 @@ class HomeView extends React.Component {
           <HeaderPanel />
         </header>
         <body className='App-Body'>
-          <div>
-            <button onClick={this.clickHandler}>wydarzenia</button>
+          <div >
+          <div className="redirect-event-container"  style={{width:'30%'}}>
+            <button className="button-events-redirect"
+              onClick={this.clickHandler}
+              style={{ width: '100%', padding: '0px', border: '0px' }}
+            >
+              <img src={events} style={{ width: '100%' }} />{' '}
+              <div style={{ backgroundColor: 'orange' }}>
+                <text>WYDARZENIA</text>
+              </div>
+              <span className="redirect-events" style={{display: 'none'}}>dupa</span>
+            </button>
+            </div>
             <PhotoBodyMenu />
           </div>
         </body>
