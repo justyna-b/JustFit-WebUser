@@ -1,88 +1,120 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/HeaderPanel.css'
 import TemporaryDrawer from '../home/MenuDrawer.js'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew'
 import AuthService from '../logging/AuthService'
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
+import {Link} from 'react-router-dom'
 
-import styled from 'styled-components'
+export default class HeaderPanel extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      auth: true,
+      name: '',
+      surname: '',
+      id: '',
+      redirectToEventsPage: false,
 
-const Row = styled.div`
-  &::after {
-    content: '';
-    clear: both;
-    display: table;
-  }
-`
+      anchorEl: null
+    }
+    this.Auth = new AuthService()
+    this.onClickLogOut = this.onClickLogOut.bind(this)
 
-function getWidthString (span) {
-  if (!span) return
-  let width = (span / 12) * 100
-  return `width:${width}%;`
-}
-
-const Column = styled.div`
-  float: left;
-  ${({ xs }) => (xs ? getWidthString(xs) : 'width:100%')};
-  color: orange;
-
-  @media only screen and (min-width: 768px) {
-    ${({ sm }) => sm && getWidthString(sm)};
-    color: orange;
-        width:100%;
-        float:center;
+    this.handleClick = this.handleClick.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
-  @media only screen and (min-width: 992px) {
-    ${({ md }) => md && getWidthString(md)};
-    color: orange;
-    margin-top: 30px;
-    cursor: pointer;
+  async componentDidMount () {
+    if (await this.Auth.loggedIn()) {
+      this.Auth.fetch(
+        `https://justfitclient.pythonanywhere.com/account/client/properties/`
+      )
+        .then(response => {
+          this.setState({
+            name: response.first_name,
+            surname: response.last_name
+          })
+        })
+        .catch(error => {
+          console.log({ message: 'ERROR ' + error })
+        })
+    } else {
+      this.setState({ auth: false })
+    }
   }
 
-  @media only screen and (min-width: 1200px) {
-    ${({ lg }) => lg && getWidthString(lg)};
-    color: orange;
-    margin-top: 30px;
-    cursor: pointer;
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget })
   }
-`
 
-export default function HeaderPanel (props) {
-  const Auth = new AuthService()
+  handleClose = () => {
+    this.setState({ anchorEl: null })
+  }
 
-  const onClickLogOut = event => {
+  onClickLogOut = event => {
     event.preventDefault()
-    Auth.logout()
+    this.Auth.logout()
     window.location.reload()
     console.log('shoul logout true')
   }
 
-  return (
-    <div>
-      <Row className='Logo-Panel'>
-        <Column xs='10' md='8' lg='8'>
-          <p className='logo'>JUST FIT </p>
-        </Column>
-        <Column xs='10' md='2' lg='2'>
-          <button type='button' className='my-contract-button'>
-            <AccessibilityNewIcon />
-            <span className='span-my-carnet'>Mój karnet </span>
-          </button>
-        </Column>
-        <Column
-          xs='10'
-          md='2'
-          lg='2'
-          className='link-logout'
-          onClick={onClickLogOut}
-        >
-          <PowerSettingsNewIcon /> Wyloguj
-        </Column>
-      </Row>
-      <div className='Menu-Panel'>
-        <TemporaryDrawer />
+  render () {
+    return (
+      <div>
+        <div className='grid-container'>
+          <div className='grid-item-b'>
+            {' '}
+            <p className='logo '>JUST FIT </p>{' '}
+          </div>
+          <div className=' grid-item-a' style={{ float: 'right' }}>
+            <Button
+              aria-controls='simple-menu'
+              aria-haspopup='true'
+              onClick={this.handleClick}
+              style={{ color: 'white' }}
+            >
+             Użytkownik: {this.state.name} {this.state.surname} <ArrowDropDownIcon />
+            </Button>
+            <Menu
+              id='simple-menu'
+              anchorEl={this.state.anchorEl}
+              keepMounted
+              open={Boolean(this.state.anchorEl)}
+              onClose={this.handleClose}
+              style={{ marginTop: '20px' }}
+            >
+              <MenuItem
+                style={{ color: 'white', background: '#14161A' }}
+                onClick={this.handleClose}
+              >
+                Moje konto
+              </MenuItem>
+              <Link to="/user">
+              <MenuItem
+                style={{ color: 'white', background: '#14161A' }}
+                onClick={this.handleClose}
+              >
+                Moje dane
+              </MenuItem>
+              </Link>
+              <MenuItem
+                style={{ color: 'white', background: '#14161A' }}
+                onClick={this.onClickLogOut}
+              >
+                Wyloguj
+              </MenuItem>
+            </Menu>
+          </div>
+        </div>
+        <div className='Menu-Panel'>
+          <TemporaryDrawer />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }

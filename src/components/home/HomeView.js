@@ -11,8 +11,8 @@ import { Redirect } from 'react-router-dom'
 import decode from 'jwt-decode'
 import { Link } from 'react-router-dom'
 import traininge from '../../photos/traininge.jpg'
-import events from '../../photos/events.jpg'
 import '../../styles/HomeView.css'
+import gymroom from '../../photos/gymroom.jpg'
 
 class HomeView extends React.Component {
   constructor (props) {
@@ -76,7 +76,7 @@ class HomeView extends React.Component {
   }
   render () {
     if (this.state.redirectToEventsPage) {
-      window.location.replace('http://www.wp.pl')
+      window.location.replace('http://localhost:8080/events')
       this.setState({ redirectToEventsPage: false })
     }
     return (
@@ -86,18 +86,30 @@ class HomeView extends React.Component {
           <HeaderPanel />
         </header>
         <body className='App-Body'>
-          <div >
-          <div className="redirect-event-container"  style={{width:'30%'}}>
-            <button className="button-events-redirect"
-              onClick={this.clickHandler}
-              style={{ width: '100%', padding: '0px', border: '0px' }}
-            >
-              <img src={events} style={{ width: '100%' }} />{' '}
-              <div style={{ backgroundColor: 'orange' }}>
-                <text>WYDARZENIA</text>
+          <div style={{ display: 'inline' }}>
+            <div style={{ width: '90%', paddingTop: '40px', marginLeft: '5%' }}>
+              <div
+                className='redirect-event-container '
+                style={{ width: '50%' }}
+              >
+                <button
+                  className='container'
+                  onClick={this.clickHandler}
+                  style={{ width: '100%', padding: '0px', border: '0px' }}
+                >
+                  <img src={gymroom} alt='Gym-room' style={{ width: '100%' }} />
+                  <div class='content'>
+                    <h1 style={{ textAlign: 'left' }}>WYDARZENIA</h1>
+                    <p style={{ fontSize: '16px', textAlign: 'left' }}>
+                      Kliknij tutaj by sprawdzić w jakich wydarzeniach bierzesz
+                      udział oraz co dla Ciebie przygotowaliśmy!
+                    </p>
+                  </div>
+                  <div class='content-hover'>
+                    <h1>PRZEJDŹ DO MOICH WYDARZEŃ</h1>
+                  </div>
+                </button>
               </div>
-              <span className="redirect-events" style={{display: 'none'}}>dupa</span>
-            </button>
             </div>
             <PhotoBodyMenu />
           </div>

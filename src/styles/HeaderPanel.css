@@ -1,49 +1,59 @@
-.logo {
-  font-weight: bold;
-  margin-left: 20px;
-  font-size: x-large;
+@media only screen and (max-width: 600px) {
+  .Menu-Panel {
+    background-color: orange;
+  }
 }
 
-.link-logout:hover {
-  font-weight: bold;
+@media only screen and (min-width: 768px) {
+  .Menu-Panel {
+    background-color: orange;
+  }
+
+  .grid-item-a {
+    display: inline;
+  }
+
+  .grid-item-b {
+    display: inline;
+  }
 }
 
-.Logo-Panel {
-  background-color: #282c34;
-  margin-bottom: 0px;
+@media only screen and (min-width: 992px) {
+  .Menu-Panel {
+    background-color: orange;
+  }
+
+  .grid-item-a {
+    display: inline;
+    color: white;
+  }
+
+  .grid-item-b {
+    display: inline-block;
+  }
+
+  .grid-container {
+    background-color: #282c34;
+    height: 60px;
+    color: white;
+  }
+
+  .MuiList-root.MuiMenu-list.MuiList-padding {
+    background-color: #14161a;
+    color: white;
+  }
 }
 
-.Menu-Panel {
-  background-color: orange;
-  padding-left: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-top: 0px;
-}
+@media only screen and (min-width: 1200px) {
+  .Menu-Panel {
+    background-color: orange;
+  }
 
-div.sc-AxirZ.bufKeR.Menu-Panel {
-  background-color: orange;
-  margin-top: 0px;
-}
+  .grid-item-a {
+    display: inline;
+  }
 
-.my-contract-button {
-  background-color: orange;
-  color: black;
-  border: 0px;
-  height: 7vh;
-  width: auto;
-  border-radius: 2px;
-  text-transform: uppercase;
-  font-weight: bolder;
-  padding-right: 15px;
-}
-
-.span-my-carnet {
-  display: inline-block;
-  padding-top: 13px;
-  float: right;
-}
-
-.MuiSvgIcon-root {
-  height: 100% !important;
+  .grid-item-b {
+    display: inline-block;
+  }
 }
