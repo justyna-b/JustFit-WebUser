@@ -1,16 +1,10 @@
 import React from 'react'
 import '../../styles/App.css'
-import TemporaryDrawer from './MenuDrawer.js'
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
-import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew'
 import HeaderPanel from '../navigation/HeaderPanel.js'
 import PhotoBodyMenu from './PhotoBodyMenu.js'
 import Footer from './Footer.js'
 import AuthService from '../logging/AuthService'
 import { Redirect } from 'react-router-dom'
-import decode from 'jwt-decode'
-import { Link } from 'react-router-dom'
-import traininge from '../../photos/traininge.jpg'
 import '../../styles/HomeView.css'
 import gymroom from '../../photos/gymroom.jpg'
 
@@ -98,14 +92,14 @@ class HomeView extends React.Component {
                   style={{ width: '100%', padding: '0px', border: '0px' }}
                 >
                   <img src={gymroom} alt='Gym-room' style={{ width: '100%' }} />
-                  <div class='content'>
+                  <div className='content'>
                     <h1 style={{ textAlign: 'left' }}>WYDARZENIA</h1>
                     <p style={{ fontSize: '16px', textAlign: 'left' }}>
                       Kliknij tutaj by sprawdzić w jakich wydarzeniach bierzesz
                       udział oraz co dla Ciebie przygotowaliśmy!
                     </p>
                   </div>
-                  <div class='content-hover'>
+                  <div className='content-hover'>
                     <h1>PRZEJDŹ DO MOICH WYDARZEŃ</h1>
                   </div>
                 </button>

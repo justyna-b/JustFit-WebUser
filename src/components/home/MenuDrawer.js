@@ -50,7 +50,7 @@ export default function TemporaryDrawer () {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Rozkład zajęć', 'Mój karnet', 'Nasza kadra'].map((text, index) => (
+        {['Rozkład zajęć', 'Mój karnet', 'Nasza kadra', 'Oferta'].map((text, index) => (
           <div className='xxx'>
             <Link to={'/' + index}>
               <ListItem button key={text}>

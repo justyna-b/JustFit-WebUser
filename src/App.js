@@ -1,8 +1,6 @@
 import React from 'react'
 import './styles/App.css'
-import TemporaryDrawer from './components/home/MenuDrawer.js'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import MenuIcon from '@material-ui/icons/Menu'
 import HomeView from './components/home/HomeView.js'
 import ProgrammeView from './components/programme/ProgrammeView.js'
 import SignedInUsersOfferView from './components/offer/SignedInUsersOfferView.js'
@@ -23,7 +21,7 @@ function App () {
           <Route path='/2' component={StaffsView} />
           <Route path='/login' component={LoginPageView} />
           <Route path='/user' component={UsersData} />
-
+          <Route path='/3' component={AvailableOffers} />
         </Switch>
       </BrowserRouter>
     </div>
