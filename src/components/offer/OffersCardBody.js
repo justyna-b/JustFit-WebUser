@@ -8,7 +8,7 @@ class CardBody extends React.Component {
         <p className='body-content'>{this.props.text}</p>
         <p className='date'>Czas umowy: {this.props.duration} miesięcy</p>
         <p className='date'>Cena: 30 zł/miesiąc</p>
-        <button className='button button-primary'>
+        <button className='button button-primary' value={this.props.value} onClick={this.props.onClick} >
           <i className='fa fa-chevron-right'></i> WYBIERZ
         </button>
       </div>

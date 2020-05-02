@@ -1,0 +1,58 @@
+.card-no-carnet {
+  width: 70%;
+  height: 70vh;
+  display: block;
+  margin: 60px auto;
+  box-shadow: 10px 5px 40px 20px darken(#341cac, 5%);
+  transition: 0.25s;
+  background-color: orange !important;
+  border-radius: 0px !important;
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.card-header-no-carnet {
+  height: 50vh !important;
+  width: 70%;
+  padding: 15px;
+  width: 100%;
+  background-size: cover;
+  color: #fff;
+}
+
+.card-header--title {
+  text-transform: uppercase;
+  margin: 0;
+  color: orange;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 15px;
+  background-color: black;
+  width: 100%;
+}
+
+.button-buy-carnet {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: larger;
+  border-radius: 20px;
+}
+
+.body-content {
+  padding-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.card-body-no-carnet-text {
+    margin-top: 20px;
+    text-transform: uppercase;
+}

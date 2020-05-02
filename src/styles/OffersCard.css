@@ -2,7 +2,6 @@
   width: 45%;
   display: block;
   margin: 60px auto;
-  border-color: orange;
   box-shadow: 10px 5px 40px 20px darken(#341cac, 5%);
   transition: 0.25s;
   background-color: orange !important;
@@ -55,6 +54,7 @@
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  font-weight: bold;
 }
 
 .designer-link {

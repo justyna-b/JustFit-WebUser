@@ -17,6 +17,7 @@ class AvailableOffers extends React.Component {
       email: '',
       id: '',
       offers: [],
+      offerValuePurchaseId: ''
     }
     this.Auth = new AuthService()
   }
@@ -41,14 +42,32 @@ class AvailableOffers extends React.Component {
       this.setState({ auth: false })
     }
 
-    await this.Auth.fetch('https://justfit-products.herokuapp.com/products').then(
-      res => {
-        this.setState({
-          offers: res
-        })
-      }
-    )
+    await this.Auth.fetch(
+      'https://justfit-products.herokuapp.com/products'
+    ).then(res => {
+      this.setState({
+        offers: res
+      })
+    })
   }
+
+  submitHandler = event => {
+    this.setState({ offerValuePurchaseId: event.target.value })
+
+    event.preventDefault()
+    this.Auth.fetch('https://justfitclient.pythonanywhere.com/api/product/', {
+      method: 'POST',
+      body: JSON.stringify({
+        id: this.state.offerValuePurchaseId
+      })
+    }).then(response => {
+      if (response.status >= 200 && response.status < 300) {
+        return response.json()
+      }
+    })
+    console.log(this.state.offerValuePurchaseId)
+  }
+
   render () {
     return (
       <div className='App'>
@@ -58,16 +77,20 @@ class AvailableOffers extends React.Component {
         </header>
         <body className='App-Body'>
           {this.state.offers.map(offer => (
-            <article className='card'>
-            <CardHeader
-              image={'https://cdn.pixabay.com/photo/2015/06/24/14/41/weights-820144_1280.jpg'}
-            />
-            <CardBody
-              title={offer.name}
-              text={offer.description}
-              duration={offer.durationInMonths}
-            />
-          </article>
+            <article className='card' key={offer.id}>
+              <CardHeader
+                image={
+                  'https://cdn.pixabay.com/photo/2015/06/24/14/41/weights-820144_1280.jpg'
+                }
+              />
+              <CardBody
+                title={offer.name}
+                text={offer.description}
+                duration={offer.durationInMonths}
+                value={offer.id}
+                onClick={this.submitHandler}
+              />
+            </article>
           ))}
         </body>
         <footer style={{ backgroundColor: 'black' }}>

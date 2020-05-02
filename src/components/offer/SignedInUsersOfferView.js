@@ -3,6 +3,7 @@ import AuthService from '../logging/AuthService'
 import { Redirect } from 'react-router-dom'
 import HeaderPanel from '../navigation/HeaderPanel.js'
 import Footer from '../home/Footer.js'
+import NoCarnetView from './UserNoCarnetView.js'
 
 class SignedInUsersOfferView extends React.Component {
   constructor (props) {
@@ -12,7 +13,8 @@ class SignedInUsersOfferView extends React.Component {
       name: '',
       surname: '',
       email: '',
-      id: ''
+      id: '',
+      usersOfferId: ''
     }
     this.Auth = new AuthService()
   }
@@ -37,13 +39,14 @@ class SignedInUsersOfferView extends React.Component {
       this.setState({ auth: false })
     }
 
-    await this.Auth.fetch('http://localhost:8090//getAllActivityTypes').then(
+     await this.Auth.fetch('https://justfitclient.pythonanywhere.com/api/product/').then(
       res => {
         this.setState({
-          activities: res
+          usersOfferId: res
         })
       }
     )
+    console.log(this.state.usersOfferId)
   }
   render () {
     return (
@@ -53,7 +56,10 @@ class SignedInUsersOfferView extends React.Component {
           <HeaderPanel />
         </header>
         <body className='App-Body'>
-          {this.state.name} {this.state.surname}
+        {
+          (this.state.usersOfferId.length > Number(0)) ? "nie jest pusty" : <NoCarnetView/>
+        }
+          {/* {this.state.name} {this.state.surname} */}
         </body>
         <footer style={{ backgroundColor: 'black' }}>
           <Footer />
