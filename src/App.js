@@ -8,6 +8,7 @@ import StaffsView from './components/staff/StaffsView.js'
 import AvailableOffers from './components/offer/AvailableOffers.js'
 import LoginPageView from './components/logging/LoginPageView.js'
 import UsersData from './components/user/UsersData.js'
+import ChoosenOffer from './components/offer/ChoosenOffer.js'
 
 function App () {
   return (
@@ -22,6 +23,7 @@ function App () {
           <Route path='/login' component={LoginPageView} />
           <Route path='/user' component={UsersData} />
           <Route path='/3' component={AvailableOffers} />
+          <Route path='/offer/selected/:offerId' component={ChoosenOffer}/>
         </Switch>
       </BrowserRouter>
     </div>

@@ -1,0 +1,31 @@
+.buttons-container {
+    margin: 0 auto;
+    align-self: flex-end;
+}
+
+.button-return-wrapper {
+    display: inline-block;
+    margin-right: 10%;
+    width: 30%;
+    margin-left: 15%;
+    margin-bottom: 20px;
+}
+
+.button-return {
+    width: 100%;
+    background-color: black;
+    color: orange;
+    border: none;
+}
+
+.button-purchase-wrapper {
+    display: inline-block;
+    width: 30%;
+}
+
+.button-purchase {
+    width: 100%;
+    background-color: orange;
+    color: black;
+    border: none;
+}

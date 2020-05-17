@@ -59,7 +59,6 @@ class SignedInUsersOfferView extends React.Component {
         {
           (this.state.usersOfferId.length > Number(0)) ? "nie jest pusty" : <NoCarnetView/>
         }
-          {/* {this.state.name} {this.state.surname} */}
         </body>
         <footer style={{ backgroundColor: 'black' }}>
           <Footer />
