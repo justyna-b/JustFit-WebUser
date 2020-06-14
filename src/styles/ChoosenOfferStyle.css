@@ -1,6 +1,7 @@
 .buttons-container {
     margin: 0 auto;
     align-self: flex-end;
+    margin-top: 30px
 }
 
 .button-return-wrapper {
@@ -16,6 +17,10 @@
     background-color: black;
     color: orange;
     border: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 20px;
+
 }
 
 .button-purchase-wrapper {
@@ -28,4 +33,47 @@
     background-color: orange;
     color: black;
     border: none;
+    font-weight: bold;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 20px;
+}
+
+.text-row-container {
+    padding-left: 25%; 
+    margin-bottom: 25px
+}
+
+.text-row {
+    color: orange;
+    margin-top: 10px;
+}              
+
+.title-container {
+    display: inline;
+    text-transform: uppercase;
+    color: orange;
+    font-weight: bold;
+}
+
+.text-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choosen-offer-img {
+    width: 100%;
+    height: 190px;
+    margin-bottom: 15px;
+}
+
+.main-container {
+    width: 60%;
+    height: 100%;
+    background-color:#282C34 ;
+    border: 2px;
+    border-color: orange;
+    border-style: solid;
+    margin-bottom: 20px;
 }

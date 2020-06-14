@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
 import '../../styles/MenuDrawerStyles.css'
 import { Link } from 'react-router-dom'
+import LabelImportantIcon from '@material-ui/icons/LabelImportant'
 
 const useStyles = makeStyles({
   list: {
@@ -50,7 +51,7 @@ export default function TemporaryDrawer () {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Rozkład zajęć', 'Mój karnet', 'Nasza kadra', 'Oferta'].map(
+        {['Rozkład zajęć', 'Mój karnet', 'Oferta', 'Moje dane'].map(
           (text, index) => (
             <div className='xxx' key={index}>
               <Link to={'/' + index}>
@@ -62,27 +63,44 @@ export default function TemporaryDrawer () {
           )
         )}
       </List>
+      <div> moge ci jakos pomóc? nkdsnakjnf wekjqhfwrhjwnekjgwnjjkgnnjrhen</div>
       <Divider />
     </div>
   )
 
   return (
     <div className='drawer'>
-      {['menu'].map(anchor => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>
-            <MenuIcon />
-            {anchor}
-          </Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
+      <div style={{ display: 'inline' }}>
+        {['menu'].map(anchor => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>
+              <MenuIcon />
+              {anchor}
+            </Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
+      </div>
+      <a href='https://just-fit.herokuapp.com/#/strona-g%C5%82owna' style={{color:'black', textDecoration:'none'}}>
+      <div
+        style={{
+          display: 'inline',
+          fontWeight: 'bolder',
+          marginLeft: '10px',
+          fontSize: '10px',
+          color: 'black',
+
+        }}
+      >
+        <LabelImportantIcon /> STRONA GŁÓWNA{' '}
+      </div>
+      </a>
     </div>
   )
 }

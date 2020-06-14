@@ -40,6 +40,7 @@ class AvailableOffers extends React.Component {
         .catch(error => {
           console.log({ message: 'ERROR ' + error })
         })
+        .then(this.setState({ loading: false }))
     } else {
       this.setState({ auth: false })
     }
@@ -50,7 +51,6 @@ class AvailableOffers extends React.Component {
           offers: res
         })
       })
-      .then(this.setState({ loading: false }))
   }
 
   getOffer = offerId => {

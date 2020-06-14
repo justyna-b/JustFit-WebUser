@@ -86,12 +86,14 @@ export default class HeaderPanel extends React.Component {
               onClose={this.handleClose}
               style={{ marginTop: '20px' }}
             >
+            <Link to='/1'>
               <MenuItem
                 style={{ color: 'white', background: '#14161A' }}
                 onClick={this.handleClose}
               >
-                Moje konto
+                Moje karnety
               </MenuItem>
+              </Link>
               <Link to="/user">
               <MenuItem
                 style={{ color: 'white', background: '#14161A' }}

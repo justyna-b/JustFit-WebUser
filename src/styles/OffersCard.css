@@ -14,7 +14,9 @@
   padding: 15px;
   width: 100%;
   background-size: cover;
-  color: #fff;
+  color: orange;
+  border-style: solid;
+  border-color: orange;
 }
 
 .card-header--title {
@@ -26,20 +28,24 @@
 
 .card-body {
   padding: 15px;
-  background-color: black;
+  background-color: #282C34;
   width: 100%;
+  border-style: solid;
+  border-width: thin;
+  border-color: orange;
 }
 
 .date {
-  font-size: 11px;
   font-weight: 600;
-  color: grey;
+  color: orange;
+  font-size: 17px;
 }
 
 .body-content {
   padding-bottom: 10px;
-  font-size: 13px;
+  font-size: 17px;
   line-height: 1.8;
+  color: orange;
 }
 
 .button-primary {
@@ -48,19 +54,41 @@
   font-family: inherit;
   background-color: transparent;
   color: orange;
-  font-size: 15px;
+  font-size: 18px;
   transition: 0.25s;
-  margin-left: 40%;
+  margin-left: 35%;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   font-weight: bold;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .designer-link {
   color: #fff;
   text-align: center;
-  fon-size: 12px;
+  font-size: 12px;
   text-decoration: none;
   display: block;
+}
+
+.offers-card-body-title {
+  color: orange;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.card-body-text-content-container {
+  margin-left: 30%;
+  padding-bottom: 30px;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -8,6 +8,8 @@ import CardBody from './OffersCardBody.js'
 import '../../styles/OffersCard.css'
 import LoadingScreen from 'react-loading-screen'
 import '../../styles/ChoosenOfferStyle.css'
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
+import offerkopia from '../../photos/offerkopia.jpg'
 
 class ChoosenOffer extends React.Component {
   constructor (props) {
@@ -18,8 +20,7 @@ class ChoosenOffer extends React.Component {
       surname: '',
       email: '',
       id: '',
-      offers: [],
-      offerValuePurchaseId: {},
+      offer: {},
       loading: true
     }
     this.Auth = new AuthService()
@@ -47,10 +48,12 @@ class ChoosenOffer extends React.Component {
       this.setState({ auth: false })
     }
 
-    await this.Auth.fetch('https://justfit-products.herokuapp.com/products')
+    await this.Auth.fetch(
+      `https://justfit-products.herokuapp.com/products/${this.props.match.params.offerId}`
+    )
       .then(res => {
         this.setState({
-          offers: res
+          offer: res
         })
       })
       .then(this.setState({ loading: false }))
@@ -60,7 +63,8 @@ class ChoosenOffer extends React.Component {
     this.Auth.fetch('https://justfitclient.pythonanywhere.com/api/product/', {
       method: 'POST',
       body: JSON.stringify({
-        special_offer_id: this.props.match.params.offerId
+        id_product: this.props.match.params.offerId,
+        active: true
       })
     }).then(response => {
       if (response.status >= 200 && response.status < 300) {
@@ -85,15 +89,44 @@ class ChoosenOffer extends React.Component {
             <HeaderPanel />
           </header>
           <body className='App-Body'>
-            <div
-              style={{ width: '60%', height: '100%', backgroundColor: 'pink' }}
-            >
-              <h3>Podsumowanie:</h3>
+            <div className='main-container'>
+              <div>
+                <img
+                  src={offerkopia}
+                  alt='Gym-room'
+                  className='choosen-offer-img'
+                />
+                <div className='text-main-container'>
+                  <h3>
+                    <div className='title-container'>
+                      {' '}
+                      {this.state.offer.name}{' '}
+                    </div>
+                  </h3>
+                </div>
+                <div className='text-row-container'>
+                  <div className='text-row'>
+                    <DoneOutlineIcon /> Użytkownik: {this.state.name}{' '}
+                    {this.state.surname}
+                  </div>
+                  <div className='text-row'>
+                    <DoneOutlineIcon /> Opis: {this.state.offer.description}
+                  </div>
+                  <div className='text-row'>
+                    <DoneOutlineIcon /> Okres trwania:{' '}
+                    {this.state.offer.durationInMonths} miesięcy
+                  </div>
+                  <div className='text-row'>
+                    <DoneOutlineIcon /> Cena: {this.state.offer.price} złoty za
+                    miesięczną subskrypcje
+                  </div>
+                </div>
+              </div>
 
               <div className='buttons-conainer'>
                 <div className='button-return-wrapper'>
                   <Link to='/3'>
-                    <button className='button-return'>anuluj</button>
+                    <button className='button-return'>ANULUJ</button>
                   </Link>
                 </div>
                 <div className='button-purchase-wrapper'>
@@ -101,7 +134,7 @@ class ChoosenOffer extends React.Component {
                     className='button-purchase'
                     onClick={() => this.submitOffer()}
                   >
-                    ta, kupuje
+                    KUPUJE
                   </button>
                 </div>
               </div>

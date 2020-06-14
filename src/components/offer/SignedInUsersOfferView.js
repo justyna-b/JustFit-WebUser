@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import HeaderPanel from '../navigation/HeaderPanel.js'
 import Footer from '../home/Footer.js'
 import NoCarnetView from './UserNoCarnetView.js'
+import MyCarnet from './MyCarnet.js'
 
 class SignedInUsersOfferView extends React.Component {
   constructor (props) {
@@ -57,7 +58,7 @@ class SignedInUsersOfferView extends React.Component {
         </header>
         <body className='App-Body'>
         {
-          (this.state.usersOfferId.length > Number(0)) ? "nie jest pusty" : <NoCarnetView/>
+          (this.state.usersOfferId.length > Number(0)) ? <MyCarnet/> : <NoCarnetView/>
         }
         </body>
         <footer style={{ backgroundColor: 'black' }}>
