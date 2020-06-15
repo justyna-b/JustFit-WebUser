@@ -81,6 +81,7 @@ export default class HeaderPanel extends React.Component {
             <Menu
               id='simple-menu'
               anchorEl={this.state.anchorEl}
+              // anchorEl="left"
               keepMounted
               open={Boolean(this.state.anchorEl)}
               onClose={this.handleClose}

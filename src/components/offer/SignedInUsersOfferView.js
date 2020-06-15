@@ -15,7 +15,8 @@ class SignedInUsersOfferView extends React.Component {
       surname: '',
       email: '',
       id: '',
-      usersOfferId: ''
+      usersOfferId: '',
+      
     }
     this.Auth = new AuthService()
   }
@@ -48,6 +49,7 @@ class SignedInUsersOfferView extends React.Component {
       }
     )
     console.log(this.state.usersOfferId)
+    
   }
   render () {
     return (
