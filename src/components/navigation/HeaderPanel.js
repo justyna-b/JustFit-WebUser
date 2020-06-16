@@ -81,7 +81,7 @@ export default class HeaderPanel extends React.Component {
             <Menu
               id='simple-menu'
               anchorEl={this.state.anchorEl}
-              // anchorEl="left"
+              // anchorEl="left"nbdjsjj
               keepMounted
               open={Boolean(this.state.anchorEl)}
               onClose={this.handleClose}
@@ -95,7 +95,7 @@ export default class HeaderPanel extends React.Component {
                 Moje karnety
               </MenuItem>
               </Link>
-              <Link to="/user">
+              <Link to="/3">
               <MenuItem
                 style={{ color: 'white', background: '#14161A' }}
                 onClick={this.handleClose}

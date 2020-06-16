@@ -82,7 +82,7 @@ class AvailableOffers extends React.Component {
               <article className='card' key={offer.id}>
                 <CardHeader
                   image={
-                    'https://cdn.pixabay.com/photo/2015/06/24/14/41/weights-820144_1280.jpg'
+                    'https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'
                   }
                 />
                 <CardBody
@@ -90,6 +90,7 @@ class AvailableOffers extends React.Component {
                   text={offer.description}
                   duration={offer.durationInMonths}
                   value={offer.id}
+                  price={offer.price}
                   onClick={({ offer }, () => this.getOffer(index))}
                 />
               </article>

@@ -6,6 +6,7 @@ import Footer from '../home/Footer.js'
 import NoCarnetView from './UserNoCarnetView.js'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
 import offerkopia from '../../photos/offerkopia.jpg'
+import LoadingScreen from 'react-loading-screen'
 
 class MyCarnet extends React.Component {
   constructor (props) {
@@ -18,7 +19,8 @@ class MyCarnet extends React.Component {
       id: '',
       usersOfferId: '',
       myCarnetsIds: [],
-      myOffer: []
+      myOffer: [],
+      loading: true
     }
     this.Auth = new AuthService()
   }
@@ -59,6 +61,10 @@ class MyCarnet extends React.Component {
             myOffer: myCarnets
           })
         })
+        .then(this.setState({ loading: false }))
+        .catch(error => {
+          console.log({ message: 'ERROR ' + error })
+        })
     }
     console.log(this.state.myOffer)
     console.log(this.state.myOffer)
@@ -66,36 +72,51 @@ class MyCarnet extends React.Component {
 
   render () {
     return (
-      <div className='App'>
-        <div>Lorem ipsum</div>
-        {this.state.myOffer.map((activity, index) => (
-          <div>
-            <img
-              src={offerkopia}
-              alt='Gym-room'
-              className='choosen-offer-img'
-            />
-            <div className='text-main-container'>
-              <h3>
-                <div className='title-container'> {activity.name} </div>
-              </h3>
+      <LoadingScreen
+        loading={this.state.loading}
+        bgColor='grey'
+        spinnerColor='orange'
+        textColor='orange'
+        text='Zmieniaj się z nami'
+      >
+        <div className='App'>
+          {this.state.myOffer.map((activity, index) => (
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+            >
+              <div style={{ width: '70%', paddingTop: '30px' }}>
+                <img
+                  src={offerkopia}
+                  alt='Gym-room'
+                  className='choosen-offer-img'
+                />
+                <div className='text-main-container'>
+                  <h3>
+                    <div className='title-container'> {activity.name} </div>
+                  </h3>
+                </div>
+                <div className='text-row-container'>
+                  <div className='text-row'>
+                    <DoneOutlineIcon /> Opis: {activity.description}
+                  </div>
+                  <div className='text-row'>
+                    <DoneOutlineIcon /> Okres trwania:{' '}
+                    {activity.durationInMonths} miesięcy
+                  </div>
+                  <div className='text-row'>
+                    <DoneOutlineIcon /> Cena: {activity.price} złoty za
+                    miesięczną subskrypcje
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className='text-row-container'>
-              <div className='text-row'>
-                <DoneOutlineIcon /> Opis: {activity.description}
-              </div>
-              <div className='text-row'>
-                <DoneOutlineIcon /> Okres trwania: {activity.durationInMonths}{' '}
-                miesięcy
-              </div>
-              <div className='text-row'>
-                <DoneOutlineIcon /> Cena: {activity.price} złoty za miesięczną
-                subskrypcje
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </LoadingScreen>
     )
   }
 }

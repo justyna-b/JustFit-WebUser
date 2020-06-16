@@ -19,10 +19,9 @@ function App () {
           <Route exact path='/home' component={HomeView} />
           <Route path='/0' component={ProgrammeView} />
           <Route path='/1' component={SignedInUsersOfferView} />
-          <Route path='/2' component={StaffsView} />
           <Route path='/login' component={LoginPageView} />
-          <Route path='/user' component={UsersData} />
-          <Route path='/3' component={AvailableOffers} />
+          <Route path='/3' component={UsersData} />
+          <Route path='/2' component={AvailableOffers} />
           <Route path='/offer/selected/:offerId' component={ChoosenOffer}/>
         </Switch>
       </BrowserRouter>

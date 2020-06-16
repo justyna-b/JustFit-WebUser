@@ -11,6 +11,8 @@ import MenuIcon from '@material-ui/icons/Menu'
 import '../../styles/MenuDrawerStyles.css'
 import { Link } from 'react-router-dom'
 import LabelImportantIcon from '@material-ui/icons/LabelImportant'
+import MailOutlineIcon from '@material-ui/icons/MailOutline'
+import PhoneIcon from '@material-ui/icons/Phone'
 
 const useStyles = makeStyles({
   list: {
@@ -63,7 +65,35 @@ export default function TemporaryDrawer () {
           )
         )}
       </List>
-      <div> moge ci jakos pomóc? nkdsnakjnf wekjqhfwrhjwnekjgwnjjkgnnjrhen</div>
+      <div style={{ padding: '20px', justifyContent: 'space-around' }}>
+        {' '}
+        Masz wątpliwości? Skonsultuj się z naszymi trenerami zadzwoń :{' '}
+      </div>
+      <div
+        style={{
+          paddingLeft: '20px',
+          paddingRight: '20px',
+          fontWeight: 'bold'
+        }}
+      >
+        <PhoneIcon /> 500 500 500
+      </div>
+      <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+        {' '}
+        lub napisz do nas pod adresem{' '}
+      </div>
+
+      <div
+        style={{
+          paddingLeft: '20px',
+          paddingRight: '20px',
+          fontWeight: 'bold'
+        }}
+      >
+        {' '}
+        <MailOutlineIcon /> justfit@gmail.com
+      </div>
+
       <Divider />
     </div>
   )
@@ -87,19 +117,21 @@ export default function TemporaryDrawer () {
           </React.Fragment>
         ))}
       </div>
-      <a href='https://just-fit.herokuapp.com/#/strona-g%C5%82owna' style={{color:'black', textDecoration:'none'}}>
-      <div
-        style={{
-          display: 'inline',
-          fontWeight: 'bolder',
-          marginLeft: '10px',
-          fontSize: '10px',
-          color: 'black',
-
-        }}
+      <a
+        href='https://just-fit.herokuapp.com/#/strona-g%C5%82owna'
+        style={{ color: 'black', textDecoration: 'none' }}
       >
-        <LabelImportantIcon /> STRONA GŁÓWNA{' '}
-      </div>
+        <div
+          style={{
+            display: 'inline',
+            fontWeight: 'bolder',
+            marginLeft: '10px',
+            fontSize: '10px',
+            color: 'black'
+          }}
+        >
+          <LabelImportantIcon /> STRONA GŁÓWNA{' '}
+        </div>
       </a>
     </div>
   )
