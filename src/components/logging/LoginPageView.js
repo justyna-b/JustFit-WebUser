@@ -51,7 +51,7 @@ class AltLoginPageView extends React.Component {
           style={{ paddingLeft: '0px', paddingRight: '0px', height: '100%' }}
           className='justify-content-md-center login-page-container'
         >
-          <Row>
+          <Row style={{display:'flex', flexWrap:'wrap', marginRight:'-15px', marginLeft:'-15px', height:'100vh'}}>
             <Col style={{ backgroundColor: 'orange' }}>
               <Col
                 lg={10}

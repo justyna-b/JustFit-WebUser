@@ -48,7 +48,8 @@ const Auth = new AuthService()
         return response.json()
       }
     })
-    handleClose();
+    .then(handleClose())
+    .then(window.location.reload())
   }
 
   return (

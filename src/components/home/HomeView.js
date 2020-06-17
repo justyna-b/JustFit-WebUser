@@ -105,6 +105,14 @@ class HomeView extends React.Component {
                 </button>
               </div>
             </div>
+            <button
+              className='container-mobile'
+              onClick={this.clickHandler}
+              style={{ width: '100%', padding: '0px', border: '0px' }}
+            >
+              {' '}
+              WYDARZENIA{' '}
+            </button>
             <PhotoBodyMenu />
           </div>
         </body>

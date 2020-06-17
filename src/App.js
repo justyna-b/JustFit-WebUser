@@ -17,6 +17,7 @@ function App () {
         <Switch>
           <Route exact path='/' component={LoginPageView} />
           <Route exact path='/home' component={HomeView} />
+          <Route exact path='/4' component={HomeView} />
           <Route path='/0' component={ProgrammeView} />
           <Route path='/1' component={SignedInUsersOfferView} />
           <Route path='/login' component={LoginPageView} />
