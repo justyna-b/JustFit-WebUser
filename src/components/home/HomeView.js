@@ -70,7 +70,7 @@ class HomeView extends React.Component {
   }
   render () {
     if (this.state.redirectToEventsPage) {
-      window.location.replace('http://localhost:8080/events')
+      window.location.replace('https://justfit-events.herokuapp.com/events/'+this.state.id)
       this.setState({ redirectToEventsPage: false })
     }
     return (

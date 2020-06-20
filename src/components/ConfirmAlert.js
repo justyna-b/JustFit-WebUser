@@ -49,7 +49,7 @@ const Auth = new AuthService()
       }
     })
     .then(handleClose())
-    .then(window.location.reload())
+    setTimeout(() =>window.location.reload(), 1000); 
   }
 
   return (
@@ -91,7 +91,7 @@ const Auth = new AuthService()
             style={{ color: 'orange', fontSize: '20px' }}
             autoFocus
           >
-            Tak, zapisuje się {props.activityToSignUp}
+            Tak, zapisuję się
           </Button>
         </DialogActions>
       </Dialog>

@@ -46,8 +46,8 @@ const Column = styled.div`
 
 export default function Footer (props) {
   return (
-    <div>
-      <Row>
+    <div style={{display:'flex', justifyContent:'center', width:'100%' }}>
+      <Row style={{width:'90%', marginLeft:'10%'}}>
         <Column xs='4' md='4' lg='4'>
           <div style={{ marginTop: '20px', marginLeft: '20px' }}>
             <div
@@ -80,7 +80,7 @@ export default function Footer (props) {
         <Column xs='4' md='4' lg='4'>
           <div style={{ marginTop: '100px' }}>
             <div style={{ color: 'orange', marginBottom: '10px' }}>
-              Kontakt:{' '}
+              Kontakt (infolinia 24h/7) {' '}
             </div>
             <div style={{ color: 'orange', marginBottom: '10px' }}>
               <EmailIcon /> justfit@gmail.com
@@ -95,7 +95,7 @@ export default function Footer (props) {
         </Column>
         <Column xs='4' md='4' lg='4'>
           <div style={{ marginTop: '100px' }}>
-            <div style={{ color: 'orange' }}> Znajdź nas: </div>
+            <div style={{ color: 'orange' }}> Znajdź nas i zaproś swoich znajomych: </div>
             <a href='https://www.facebook.com/'>
               <div style={{ color: 'orange', fontSize: '40px' }}>
                 {' '}

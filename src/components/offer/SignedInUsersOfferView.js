@@ -7,7 +7,6 @@ import NoCarnetView from './UserNoCarnetView.js'
 import MyCarnet from './MyCarnet.js'
 import LoadingScreen from 'react-loading-screen'
 
-
 class SignedInUsersOfferView extends React.Component {
   constructor (props) {
     super(props)
@@ -18,7 +17,7 @@ class SignedInUsersOfferView extends React.Component {
       email: '',
       id: '',
       usersOfferId: '',
-       loading: true
+      loading: true
     }
     this.Auth = new AuthService()
   }
@@ -45,47 +44,43 @@ class SignedInUsersOfferView extends React.Component {
 
     await this.Auth.fetch(
       'https://justfitclient.pythonanywhere.com/api/product/'
-    ).then(res => {
-      this.setState({
-        usersOfferId: res
-      })
-    })
-    .then(this.setState({ loading: false }))
-     .catch(error => {
-          console.log({ message: 'ERROR ' + error })
+    )
+      .then(res => {
+        this.setState({
+          usersOfferId: res
         })
+      })
+      .then(this.setState({ loading: false }))
+      .catch(error => {
+        console.log({ message: 'ERROR ' + error })
+      })
     console.log(this.state.usersOfferId)
   }
   render () {
     return (
-       <LoadingScreen
+      <LoadingScreen
         loading={this.state.loading}
         bgColor='grey'
         spinnerColor='orange'
         textColor='orange'
         text='Zmieniaj się z nami'
       >
-      <div className='App'>
-        {this.state.auth ? '' : <Redirect to='/login' />}
-        <header>
-          <HeaderPanel />
-        </header>
-        <body className='App-Body'>
-          {/* {this.state.usersOfferId.length > Number(0) ? (
-            <MyCarnet />
-          ) : (
-            <NoCarnetView />
-          )} */}
-              {this.state.usersOfferId.length > Number(0) ? (
-            <MyCarnet />
-          ) : (
-            <NoCarnetView />
-          )}
-        </body>
-        <footer style={{ backgroundColor: 'black' }}>
-          <Footer />
-        </footer>
-      </div>
+        <div className='App'>
+          {this.state.auth ? '' : <Redirect to='/login' />}
+          <header>
+            <HeaderPanel />
+          </header>
+          <body className='App-Body'>
+            {this.state.usersOfferId.length > Number(0) ? (
+              <MyCarnet />
+            ) : (
+              <NoCarnetView />
+            )}
+          </body>
+          <footer style={{ backgroundColor: 'black' }}>
+            <Footer />
+          </footer>
+        </div>
       </LoadingScreen>
     )
   }

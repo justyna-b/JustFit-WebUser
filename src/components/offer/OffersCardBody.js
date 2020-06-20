@@ -26,7 +26,7 @@ class CardBody extends React.Component {
               miesięcy
             </div>
             <div className='text-row'>
-              <AttachMoneyIcon /> Cena: {this.props.price} złoty za miesięczną
+              <AttachMoneyIcon /> Cena: {this.props.price} złotych za miesięczną
               subskrypcje
             </div>
           </div>
