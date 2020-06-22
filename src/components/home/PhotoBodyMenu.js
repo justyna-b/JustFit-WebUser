@@ -100,7 +100,7 @@ export default function PhotoBodyMenu (props) {
           </div>
         </Column>
         <Column xs='4' md='4' lg='4'>
-        <a href='https://just-fit.herokuapp.com/#/strona-g%C5%82owna'>
+        <a href='https://just-fit.herokuapp.com/#/strona-g%C5%82owna#employess'>
           <button className='button-link'>trenerzy</button>
           </a>
         </Column>
