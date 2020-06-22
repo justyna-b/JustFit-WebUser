@@ -21,7 +21,8 @@ class ChoosenOffer extends React.Component {
       email: '',
       id: '',
       offer: {},
-      loading: true
+      loading: true,
+      bought: false
     }
     this.Auth = new AuthService()
   }
@@ -39,7 +40,6 @@ class ChoosenOffer extends React.Component {
             id: res.id,
             offerId: this.props.match.params.offerId
           })
-          console.log(this.props.match.params.offerId)
         })
         .catch(error => {
           console.log({ message: 'ERROR ' + error })
@@ -67,11 +67,11 @@ class ChoosenOffer extends React.Component {
         active: true
       })
     }).then(response => {
+      this.setState({ bought: true })
       if (response.status >= 200 && response.status < 300) {
         return response.json()
       }
     })
-    console.log(this.state.offerValuePurchaseId)
   }
 
   render () {
@@ -90,54 +90,63 @@ class ChoosenOffer extends React.Component {
           </header>
           <body className='App-Body'>
             <div className='main-container'>
-              <div>
-                <img
-                  src={offerkopia}
-                  alt='Gym-room'
-                  className='choosen-offer-img'
-                />
-                <div className='text-main-container'>
-                  <h3>
-                    <div className='title-container'>
-                      {' '}
-                      {this.state.offer.name}{' '}
+              {this.state.bought ? (
+                <div className='bought-container'>
+                  <div className='bought-carnet'>Kupione</div>
+                  <Link to="/2"><button className='bought-button'>powrót</button></Link>
+                </div>
+              ) : (
+                <div>
+                  <div>
+                    <img
+                      src={offerkopia}
+                      alt='Gym-room'
+                      className='choosen-offer-img'
+                    />
+                    <div className='text-main-container'>
+                      <h3>
+                        <div className='title-container'>
+                          {' '}
+                          {this.state.offer.name}{' '}
+                        </div>
+                      </h3>
                     </div>
-                  </h3>
-                </div>
-                <div className='text-row-container'>
-                  <div className='text-row'>
-                    <DoneOutlineIcon /> Użytkownik: {this.state.name}{' '}
-                    {this.state.surname}
+                    <div className='text-row-container'>
+                      <div className='text-row'>
+                        <DoneOutlineIcon /> Użytkownik: {this.state.name}{' '}
+                        {this.state.surname}
+                      </div>
+                      <div className='text-row'>
+                        <DoneOutlineIcon /> Opis: {this.state.offer.description}
+                      </div>
+                      <div className='text-row'>
+                        <DoneOutlineIcon /> Okres trwania:{' '}
+                        {this.state.offer.durationInMonths} miesięcy
+                      </div>
+                      <div className='text-row'>
+                        <DoneOutlineIcon /> Cena: {this.state.offer.price} złoty
+                        za miesięczną subskrypcje
+                      </div>
+                    </div>
                   </div>
-                  <div className='text-row'>
-                    <DoneOutlineIcon /> Opis: {this.state.offer.description}
-                  </div>
-                  <div className='text-row'>
-                    <DoneOutlineIcon /> Okres trwania:{' '}
-                    {this.state.offer.durationInMonths} miesięcy
-                  </div>
-                  <div className='text-row'>
-                    <DoneOutlineIcon /> Cena: {this.state.offer.price} złoty za
-                    miesięczną subskrypcje
-                  </div>
-                </div>
-              </div>
 
-              <div className='buttons-conainer'>
-                <div className='button-return-wrapper'>
-                  <Link to='/3'>
-                    <button className='button-return'>ANULUJ</button>
-                  </Link>
+                  <div className='buttons-conainer'>
+                    <div className='button-return-wrapper'>
+                      <Link to='/2'>
+                        <button className='button-return'>ANULUJ</button>
+                      </Link>
+                    </div>
+                    <div className='button-purchase-wrapper'>
+                      <button
+                        className='button-purchase'
+                        onClick={() => this.submitOffer()}
+                      >
+                        KUPUJE
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className='button-purchase-wrapper'>
-                  <button
-                    className='button-purchase'
-                    onClick={() => this.submitOffer()}
-                  >
-                    KUPUJE
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           </body>
           <footer style={{ backgroundColor: 'black' }}>

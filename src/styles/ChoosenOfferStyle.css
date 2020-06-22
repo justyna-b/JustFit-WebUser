@@ -77,3 +77,31 @@
     border-style: solid;
     margin-bottom: 20px;
 }
+
+.bought-carnet {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    color: orange;
+}
+
+.bought-container {
+    padding-top: 15px;
+    justify-content: center;
+    display: grid;
+    padding-bottom: 15px;
+}
+
+.bought-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: orange;
+    background-color: black;
+    border-radius: 20px;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px;
+}
