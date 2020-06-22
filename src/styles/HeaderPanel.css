@@ -2,6 +2,11 @@
   .Menu-Panel {
     background-color: orange;
   }
+  .logo {
+    font-size: 14px;
+    font-weight: bold;
+    color: orange;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -15,6 +20,16 @@
 
   .grid-item-b {
     display: inline;
+  }
+
+  header {
+    background-color: #282C34;
+  }
+
+  .logo {
+    font-size: 14px;
+    font-weight: bold;
+    color: orange;
   }
 }
 
@@ -42,6 +57,12 @@
     background-color: #14161a;
     color: white;
   }
+
+  .logo {
+    font-size: 14px;
+    font-weight: bold;
+    color: orange;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -55,5 +76,10 @@
 
   .grid-item-b {
     display: inline-block;
+  }
+  .logo {
+    font-size: 14px;
+    font-weight: bold;
+    color: orange;
   }
 }

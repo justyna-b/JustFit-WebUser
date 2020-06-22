@@ -17,20 +17,36 @@ class ProgrammeView extends React.Component {
       surname: '',
       email: '',
       id: '',
-      activitiesMonday: [],
-      activitiesTuesday: [],
-      activitiesWednesday: [],
-      activitiesThursday: [],
-      activitiesFriday: [],
-      activitiesSaturday: [],
-      activitiesSunday: [],
       activityId: '',
       activityToSignUp: '',
-      activities: [],
+      weekActivities: [],
       myExercises: [],
+      labels: [],
       loading: true
     }
     this.Auth = new AuthService()
+  }
+
+  formatDate (begining) {
+    var dd = String(begining.getDate()).padStart(2, '0')
+    var mm = String(begining.getMonth() + 1).padStart(2, '0')
+    var yyyy = begining.getFullYear()
+
+    return dd + '.' + mm + '.' + yyyy
+  }
+
+  prepareLabel (date) {
+    var dayOfWeek = date.getDay()
+    var label = [
+      'Niedziela',
+      'Poniedziałek',
+      'Wtorek',
+      'Środa',
+      'Czwartek',
+      'Piątek',
+      'Sobota'
+    ]
+    return label[dayOfWeek]
   }
 
   async componentDidMount () {
@@ -56,68 +72,27 @@ class ProgrammeView extends React.Component {
 
     var begining = new Date()
     var dd = String(begining.getDate()).padStart(2, '0')
-    var mm = String(begining.getMonth() + 1).padStart(2, '0')
+    var mm = String(begining.getMonth()).padStart(2, '0')
     var yyyy = begining.getFullYear()
-    var today = dd + '.' + mm + '.' + yyyy
-    var tommorow = new Date()
-    tommorow.setDate(begining.getDate() + 1)
-    dd = String(tommorow.getDate()).padStart(2, '0')
-    mm = String(tommorow.getMonth() + 1).padStart(2, '0')
-    yyyy = tommorow.getFullYear()
-    var tommorow = dd + '.' + mm + '.' + yyyy
+    var begining = new Date(yyyy, mm, dd)
 
+    // console.log(begining)
+    for (var i = 0; i < 7; i++) {
+      const nextDay = new Date(begining)
+      nextDay.setDate(nextDay.getDate() + i)
+      console.log(nextDay)
+      this.setState({
+        labels: [...this.state.labels, this.prepareLabel(nextDay)]
+      })
+      await this.Auth.fetch(
+        `https://planowanie-zajec.herokuapp.com/getActivitiesByDate/${this.formatDate(
+          nextDay
+        )}`
+      ).then(res => {
+        this.setState({ weekActivities: [...this.state.weekActivities, res] })
+      })
+    }
 
-    await this.Auth.fetch(
-      `https://planowanie-zajec.herokuapp.com/getActivitiesByDate/${today}`
-    ).then(res => {
-      this.setState({
-        activitiesMonday: res
-      })
-      console.log(today)
-    })
-    await this.Auth.fetch(
-      `https://planowanie-zajec.herokuapp.com/getActivitiesByDate/${tommorow}`
-    ).then(res => {
-      this.setState({
-        activitiesTuesday: res
-      })
-        console.log(tommorow)
-    })
-    await this.Auth.fetch(
-      'https://planowanie-zajec.herokuapp.com/getActivitiesByDate/03.06.2020'
-    ).then(res => {
-      this.setState({
-        activitiesWednesday: res
-      })
-    })
-    await this.Auth.fetch(
-      'https://planowanie-zajec.herokuapp.com/getActivitiesByDate/04.06.2020'
-    ).then(res => {
-      this.setState({
-        activitiesThursday: res
-      })
-    })
-    await this.Auth.fetch(
-      'https://planowanie-zajec.herokuapp.com/getActivitiesByDate/05.06.2020'
-    ).then(res => {
-      this.setState({
-        activitiesFriday: res
-      })
-    })
-    await this.Auth.fetch(
-      'https://planowanie-zajec.herokuapp.com/getActivitiesByDate/06.06.2020'
-    ).then(res => {
-      this.setState({
-        activitiesSaturday: res
-      })
-    })
-    await this.Auth.fetch(
-      'https://planowanie-zajec.herokuapp.com/getActivitiesByDate/07.06.2020'
-    ).then(res => {
-      this.setState({
-        activitiesSunday: res
-      })
-    })
     await this.Auth.fetch(
       'https://justfitclient.pythonanywhere.com/api/activity/'
     )
@@ -133,59 +108,11 @@ class ProgrammeView extends React.Component {
       .then(this.setState({ loading: false }))
   }
 
-  getOfferMonday = offerId => {
+  getOffer = (day, offerId) => {
     this.setState(
-      { activityToSignUp: this.state.activitiesMonday[offerId].id },
+      { activityToSignUp: this.state.weekActivities[day][offerId].id },
       () => {
-        console.log(this.state.activityToSignUp)
-      }
-    )
-  }
-  getOfferTuesday = offerId => {
-    this.setState(
-      { activityToSignUp: this.state.activitiesTuesday[offerId].id },
-      () => {
-        console.log(this.state.activityToSignUp)
-      }
-    )
-  }
-  getOfferWednesday = offerId => {
-    this.setState(
-      { activityToSignUp: this.state.activitiesWednesday[offerId].id },
-      () => {
-        console.log(this.state.activityToSignUp)
-      }
-    )
-  }
-  getOfferThursday = offerId => {
-    this.setState(
-      { activityToSignUp: this.state.activitiesThursday[offerId].id },
-      () => {
-        console.log(this.state.activityToSignUp)
-      }
-    )
-  }
-  getOfferFriday = offerId => {
-    this.setState(
-      { activityToSignUp: this.state.activitiesFriday[offerId].id },
-      () => {
-        console.log(this.state.activityToSignUp)
-      }
-    )
-  }
-  getOfferSaturday = offerId => {
-    this.setState(
-      { activityToSignUp: this.state.activitiesSaturday[offerId].id },
-      () => {
-        console.log(this.state.activityToSignUp)
-      }
-    )
-  }
-
-  getOfferSunday = offerId => {
-    this.setState(
-      { activityToSignUp: this.state.activitiesSunday[offerId].id },
-      () => {
+        console.log('this.state.activityToSignUp')
         console.log(this.state.activityToSignUp)
       }
     )
@@ -207,286 +134,51 @@ class ProgrammeView extends React.Component {
           </header>
           <body className='App-Body'>
             <div className='main-scheduler-container'>
-              <div className='day-scheduler-container'>
-                <h3>Poniedziałek</h3>
-                {this.state.activitiesMonday.map((activity, index) => (
-                  <div className='main-activity-container'>
-                    <p>{activity.leader}</p>
-                    <p
-                      style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-                    >
-                      {activity.activityType}
-                    </p>
-                    <p>
-                      {activity.hourStart} - {activity.hourEnd}
-                    </p>
-                    <p>{activity.classCanceled}</p>
-                    {this.state.myExercises.includes(activity.id) === true ? (
-                      <div className='button-container'>
-                        <button className='enrolled-button' disabled={true}>
-                          zapisany
-                        </button>
-                      </div>
-                    ) : (
-                      <div className='button-container'>
-                        <ConfirmAlert
-                          textA={activity.name}
-                          date={activity.date}
-                          activityId={activity.id}
-                          hourStart={activity.hourStart}
-                          hourEnd={activity.hourEnd}
-                          id={this.state.id}
-                          exercises={this.state.exercises}
-                          onClick={
-                            ({ activity }, () => this.getOfferMonday(index))
-                          }
-                          activityToSignUp={this.state.activityToSignUp}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className='day-scheduler-container'>
-                <h3>Wtorek</h3>
-                {this.state.activitiesTuesday.map((activity, index) => (
-                  <div className='main-activity-container'>
-                    <p>{activity.leader}</p>
-                    <p
-                      style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-                    >
-                      {activity.activityType}
-                    </p>
-                    <p>
-                      {activity.hourStart} - {activity.hourEnd}
-                    </p>
-                    <p>{activity.classCanceled}</p>
-                    {this.state.myExercises.includes(activity.id) === true ? (
-                      <div className='button-container'>
-                        <button className='enrolled-button' disabled={true}>
-                          zapisany
-                        </button>
-                      </div>
-                    ) : (
-                      <div className='button-container'>
-                        <ConfirmAlert
-                          textA={activity.name}
-                          date={activity.date}
-                          activityId={activity.id}
-                          hourStart={activity.hourStart}
-                          hourEnd={activity.hourEnd}
-                          id={this.state.id}
-                          exercises={this.state.exercises}
-                          onClick={
-                            ({ activity }, () => this.getOfferTuesday(index))
-                          }
-                          activityToSignUp={this.state.activityToSignUp}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className='day-scheduler-container'>
-                <h3>Środa</h3>
-                {this.state.activitiesWednesday.map((activity, index) => (
-                  <div className='main-activity-container'>
-                    <p>{activity.leader}</p>
-                    <p
-                      style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-                    >
-                      {activity.activityType}
-                    </p>
-                    <p>
-                      {activity.hourStart} - {activity.hourEnd}
-                    </p>
-                    <p>{activity.classCanceled}</p>
-                    {this.state.myExercises.includes(activity.id) === true ? (
-                      <div className='button-container'>
-                        <button className='enrolled-button' disabled={true}>
-                          zapisany
-                        </button>
-                      </div>
-                    ) : (
-                      <div className='button-container'>
-                        <ConfirmAlert
-                          textA={activity.name}
-                          date={activity.date}
-                          activityId={activity.id}
-                          hourStart={activity.hourStart}
-                          hourEnd={activity.hourEnd}
-                          id={this.state.id}
-                          exercises={this.state.exercises}
-                          onClick={
-                            ({ activity }, () => this.getOfferWednesday(index))
-                          }
-                          activityToSignUp={this.state.activityToSignUp}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className='day-scheduler-container'>
-                <h3>Czwartek</h3>
-                {this.state.activitiesThursday.map((activity, index) => (
-                  <div className='main-activity-container'>
-                    <p>{activity.leader}</p>
-                    <p
-                      style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-                    >
-                      {activity.activityType}
-                    </p>
-                    <p>
-                      {activity.hourStart} - {activity.hourEnd}
-                    </p>
-                    <p>{activity.classCanceled}</p>
-                    {this.state.myExercises.includes(activity.id) === true ? (
-                      <div className='button-container'>
-                        <button className='enrolled-button' disabled={true}>
-                          zapisany
-                        </button>
-                      </div>
-                    ) : (
-                      <div className='button-container'>
-                        <ConfirmAlert
-                          textA={activity.name}
-                          date={activity.date}
-                          activityId={activity.id}
-                          hourStart={activity.hourStart}
-                          hourEnd={activity.hourEnd}
-                          id={this.state.id}
-                          exercises={this.state.exercises}
-                          onClick={
-                            ({ activity }, () => this.getOfferThursday(index))
-                          }
-                          activityToSignUp={this.state.activityToSignUp}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className='day-scheduler-container'>
-                <h3>Piątek</h3>
-                {this.state.activitiesFriday.map((activity, index) => (
-                  <div className='main-activity-container'>
-                    <p>{activity.leader}</p>
-                    <p
-                      style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-                    >
-                      {activity.activityType}
-                    </p>
-                    <p>
-                      {activity.hourStart} - {activity.hourEnd}
-                    </p>
-                    <p>{activity.classCanceled}</p>
-                    {this.state.myExercises.includes(activity.id) === true ? (
-                      <div className='button-container'>
-                        <button className='enrolled-button' disabled={true}>
-                          zapisany
-                        </button>
-                      </div>
-                    ) : (
-                      <div className='button-container'>
-                        <ConfirmAlert
-                          textA={activity.name}
-                          date={activity.date}
-                          activityId={activity.id}
-                          hourStart={activity.hourStart}
-                          hourEnd={activity.hourEnd}
-                          id={this.state.id}
-                          exercises={this.state.exercises}
-                          onClick={
-                            ({ activity }, () => this.getOfferFriday(index))
-                          }
-                          activityToSignUp={this.state.activityToSignUp}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className='day-scheduler-container'>
-                <h3>Sobota</h3>
-                {this.state.activitiesSunday.map((activity, index) => (
-                  <div className='main-activity-container'>
-                    <p>{activity.leader}</p>
-                    <p
-                      style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-                    >
-                      {activity.activityType}
-                    </p>
-                    <p>
-                      {activity.hourStart} - {activity.hourEnd}
-                    </p>
-                    <p>{activity.classCanceled}</p>
-                    {this.state.myExercises.includes(activity.id) === true ? (
-                      <div className='button-container'>
-                        <button className='enrolled-button' disabled={true}>
-                          zapisany
-                        </button>
-                      </div>
-                    ) : (
-                      <div className='button-container'>
-                        <ConfirmAlert
-                          textA={activity.name}
-                          date={activity.date}
-                          activityId={activity.id}
-                          hourStart={activity.hourStart}
-                          hourEnd={activity.hourEnd}
-                          id={this.state.id}
-                          exercises={this.state.exercises}
-                          onClick={
-                            ({ activity }, () => this.getOfferSaturday(index))
-                          }
-                          activityToSignUp={this.state.activityToSignUp}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className='day-scheduler-container'>
-                <h3>Niedziela</h3>
-                {this.state.activitiesSunday.map((activity, index) => (
-                  <div className='main-activity-container'>
-                    <p>{activity.leader}</p>
-                    <p
-                      style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-                    >
-                      {activity.activityType}
-                    </p>
-                    <p>
-                      {activity.hourStart} - {activity.hourEnd}
-                    </p>
-                    <p>{activity.classCanceled}</p>
-                    {this.state.myExercises.includes(activity.id) === true ? (
-                      <div className='button-container'>
-                        <button className='enrolled-button' disabled={true}>
-                          zapisany
-                        </button>
-                      </div>
-                    ) : (
-                      <div className='button-container'>
-                        <ConfirmAlert
-                          textA={activity.name}
-                          date={activity.date}
-                          activityId={activity.id}
-                          hourStart={activity.hourStart}
-                          hourEnd={activity.hourEnd}
-                          id={this.state.id}
-                          exercises={this.state.exercises}
-                          onClick={
-                            ({ activity }, () => this.getOfferSunday(index))
-                          }
-                          activityToSignUp={this.state.activityToSignUp}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+              {this.state.weekActivities.map((day, i) => (
+                <div className='day-scheduler-container'>
+                  <h3>{this.state.labels[i]}</h3>
+                  {day.map((activity, index) => (
+                    <div className='main-activity-container'>
+                      <p>{activity.leader}</p>
+                      <p
+                        style={{
+                          fontWeight: 'bold',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        {activity.activityType}
+                      </p>
+                      <p>
+                        {activity.hourStart} - {activity.hourEnd}
+                      </p>
+                      <p>{activity.classCanceled}</p>
+                      {this.state.myExercises.includes(activity.id) === true ? (
+                        <div className='button-container'>
+                          <button className='enrolled-button' disabled={true}>
+                            zapisany
+                          </button>
+                        </div>
+                      ) : (
+                        <div className='button-container'>
+                          <ConfirmAlert
+                            textA={activity.name}
+                            date={activity.date}
+                            activityId={activity.id}
+                            hourStart={activity.hourStart}
+                            hourEnd={activity.hourEnd}
+                            id={this.state.id}
+                            exercises={this.state.exercises}
+                            onClick={
+                              ({ activity }, () => this.getOffer(i, index))
+                            }
+                            activityToSignUp={this.state.activityToSignUp}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </body>
           <footer style={{ backgroundColor: 'black' }}>

@@ -10,25 +10,23 @@ import { useTheme } from '@material-ui/core/styles'
 import '../styles/ProgrammeView.css'
 import AuthService from './logging/AuthService'
 
-
-
 export default function ConfirmAlert (props) {
   const [open, setOpen] = React.useState(false)
   const theme = useTheme()
   const [exercises, setExercises] = React.useState([])
 
-const Auth = new AuthService()
+  const Auth = new AuthService()
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const handleClickOpen = () => {
-    setOpen(true);
-      Auth.fetch(
-      'https://justfitclient.pythonanywhere.com/api/activity/'
-    ).then(res => {
-    setExercises(res)
-      console.log(exercises)
-    })
-    props.onClick();
+    setOpen(true)
+    Auth.fetch('https://justfitclient.pythonanywhere.com/api/activity/').then(
+      res => {
+        setExercises(res)
+        console.log(exercises)
+      }
+    )
+    props.onClick()
   }
 
   const handleClose = () => {
@@ -36,27 +34,30 @@ const Auth = new AuthService()
   }
 
   const confirm = () => {
-      Auth.fetch('https://justfitclient.pythonanywhere.com/api/activity/', {
+    Auth.fetch('https://justfitclient.pythonanywhere.com/api/activity/', {
       method: 'POST',
       body: JSON.stringify({
         id_activity: props.activityToSignUp,
         user: props.id,
-        active: true,
+        active: true
       })
-    }).then(response => {
-      if (response.status >= 200 && response.status < 300) {
-        return response.json()
-      }
     })
-    .then(handleClose())
-    setTimeout(() =>window.location.reload(), 1000); 
+      .then(response => {
+        if (response.status >= 200 && response.status < 300) {
+          return response.json()
+        }
+      })
+      .then(handleClose())
+    setTimeout(() => window.location.reload(), 1000)
   }
 
   return (
     <div>
-      <Button className='sign-up-button'  onClick={handleClickOpen} >
-        Zapisz się
-      </Button>
+      <div className='button-to-enroll'>
+        <Button className='sign-up-button' onClick={handleClickOpen}>
+          Zapisz się
+        </Button>{' '}
+      </div>
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -79,7 +80,7 @@ const Auth = new AuthService()
           <DialogContentText style={{ fontSize: '15px' }}>
             Pamiętaj, żeby w przypadku gdy zrezygnujesz z uczestictwa w
             zajęciach poinformować nas o tym poprzez swój profil lub pod numerem
-            telefonu (500 500 500) 
+            telefonu (500 500 500)
           </DialogContentText>
         </DialogContent>
         <DialogActions>
