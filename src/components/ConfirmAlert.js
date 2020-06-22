@@ -23,7 +23,7 @@ const Auth = new AuthService()
   const handleClickOpen = () => {
     setOpen(true);
       Auth.fetch(
-      'https://justfitclient.pythonanywhere.com/api/exercise/'
+      'https://justfitclient.pythonanywhere.com/api/activity/'
     ).then(res => {
     setExercises(res)
       console.log(exercises)
@@ -36,10 +36,10 @@ const Auth = new AuthService()
   }
 
   const confirm = () => {
-      Auth.fetch('https://justfitclient.pythonanywhere.com/api/exercise/', {
+      Auth.fetch('https://justfitclient.pythonanywhere.com/api/activity/', {
       method: 'POST',
       body: JSON.stringify({
-        id_exercise: props.activityToSignUp,
+        id_activity: props.activityToSignUp,
         user: props.id,
         active: true,
       })

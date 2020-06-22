@@ -51,7 +51,15 @@ class AltLoginPageView extends React.Component {
           style={{ paddingLeft: '0px', paddingRight: '0px', height: '100%' }}
           className='justify-content-md-center login-page-container'
         >
-          <Row style={{display:'flex', flexWrap:'wrap', marginRight:'-15px', marginLeft:'-15px', height:'100vh'}}>
+          <Row
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              marginRight: '-15px',
+              marginLeft: '-15px',
+              height: '100vh'
+            }}
+          >
             <Col style={{ backgroundColor: 'orange' }}>
               <Col
                 lg={10}
@@ -67,6 +75,17 @@ class AltLoginPageView extends React.Component {
                   {' '}
                   JUST FIT{' '}
                 </h1>
+                <div
+                  style={{
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    display: 'inline-block',
+                    paddingBottom: '10px',
+                    color: 'red'
+                  }}
+                >
+                  {this.state.message}
+                </div>
                 <form onSubmit={this.handleSubmit}>
                   <Form.Group controlId='formBasicEmail'>
                     <InputGroup>

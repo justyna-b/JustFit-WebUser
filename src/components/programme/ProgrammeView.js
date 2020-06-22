@@ -105,11 +105,11 @@ class ProgrammeView extends React.Component {
       })
     })
     await this.Auth.fetch(
-      'https://justfitclient.pythonanywhere.com/api/exercise/'
+      'https://justfitclient.pythonanywhere.com/api/activity/'
     )
     .then(res => {
       var temp = []
-      res.map(exercise => temp.push(exercise.id_exercise))
+      res.map(exercise => temp.push(exercise.id_activity))
       this.setState({
         myExercises: temp
       })
